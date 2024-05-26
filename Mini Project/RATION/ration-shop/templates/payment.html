@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tfoot {
+            font-weight: bold;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .qr-code {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .qr-code img {
+            width: 200px; /* Adjust the size of the QR code as needed */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Payment Bill</h1>
+        </div>
+        <div class="qr-code">
+            <img src="https://cdn.swisscows.com/image?url=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.MF7dS6zQ0D6bnRltUz_oawHaHa%26pid%3DApi" alt="QR Code">
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>₹{{ item.price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">Total Price:</td>
+                    <td>₹{{ total_price }}</td>
+                </tr>
+            </tfoot>
+        </table>
+        <p>Thank you for your payment!</p>
+    <form id="clear-cart-form" method="post" action="/clear_cart">
+        <button type="button" class="btn btn-danger" onclick="clearCart()">Clear Cart</button>
+    </form>
+
+    <script>
+        function clearCart() {
+            var form = document.getElementById('clear-cart-form');
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', form.action, true);
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    // Reload the page after successful cart clear
+                    window.location.reload();
+                }
+            };
+            xhr.send(new FormData(form));
+        }
+    </script>
+</body>
+</html>

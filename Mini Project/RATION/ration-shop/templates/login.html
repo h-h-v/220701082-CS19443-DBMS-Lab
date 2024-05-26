@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="https://cdn.swisscows.com/image?url=https%3A%2F%2Fclipground.com%2Fimages%2Ftamil-nadu-government-logo-png-6.png" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            background-image: url('data:image/svg+xml,%3Csvg width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg"%3E%3Ccircle cx="5" cy="5" r="3" fill="%23b4e1b1" fill-opacity="0.3" /%3E%3C/svg%3E');
+        }
+
+        .header {
+            background-color: #ffffff;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            max-width: 100px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .info {
+            margin-bottom: 20px;
+        }
+
+        .info-text {
+            padding: 20px;
+            overflow-y: auto;
+            max-height: 200px;
+        }
+
+        .info-text h3 {
+            margin-top: 0;
+        }
+
+        .login-form {
+            max-width: 60%;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .toggle-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: transparent;
+            color: #7f7f7f;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .toggle-btn:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #035703;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .call-btn {
+            display: inline-block;
+            background-color: transparent;
+            color: #7f7f7f;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 20px;
+            font-size: 20px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="static/tnlogo.png" alt="Tamil Nadu Logo" class="logo">
+        <h2>Tamil Nadu Government</h2>
+        <div class="dropdown">
+            <button class="call-btn">📞Call</button>
+            <div class="dropdown-content">
+                <a href="#">A State Level Tollfree PDS Helpline is functional under short code 1967 and 1800-425-5901.</a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="info">
+                    <div class="login-form">
+                        {% if error %}
+                            <p class="error">{{ error }}</p>
+                        {% endif %}
+                        <h2>Login</h2>
+                        <form action="{{ url_for('login') }}" method="post">
+                            <label for="username">Ration Card Number:</label>
+                            <input type="text" id="username" name="username" required>
+                            <label for="password">Mobile Number:</label>
+                            <input type="text" id="password" name="password" required>
+                            <input type="submit" value="Get OTP">
+                        </form>
+                    </div>
+                </div>
+                <div class="info-text" id="info-text">
+                    <h3>ரேஷன் அட்டை</h3>
+                    <p>Ration Card serves as an important document for availing various government schemes and benefits. It can be used to apply for scholarships, subsidized housing, and other social welfare programs. It is also a valid proof of identity and residence for various administrative and legal purposes.</p>
+                    <p style="display: none;">அரசின் பல்வேறு திட்டங்கள் மற்றும் பலன்களைப் பெறுவதற்கு ரேஷன் கார்டு ஒரு முக்கிய ஆவணமாகச் செயல்படுகிறது. உதவித்தொகை, மானிய விலையில் வீடுகள் மற்றும் பிற சமூக நலத் திட்டங்களுக்கு விண்ணப்பிக்க இதைப் பயன்படுத்தலாம். இது பல்வேறு நிர்வாக மற்றும் சட்ட நோக்கங்களுக்காக அடையாளம் மற்றும் வசிப்பிடத்திற்கான சரியான ஆதாரமாகும்.</p>
+                </div>
+            </div>
+        </div>
+        <button class="toggle-btn" onclick="toggleText()">தமிழ்</button>
+    </div>
+    <footer>
+        Copyright Ⓒ Government of Tamil Nadu. All Rights Reserved
+    </footer>
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function toggleText() {
+            var infoText = document.getElementById('info-text');
+            var paragraphs = infoText.getElementsByTagName('p');
+            var index = 0;
+
+            if (paragraphs[0].style.display === 'none') {
+                paragraphs[0].style.display = 'block';
+                paragraphs[1].style.display = 'none';
+                document.querySelector('.toggle-btn').textContent = 'தமிழ்';
+            } else {
+                paragraphs[0].style.display = 'none';
+                paragraphs[1].style.display = 'block';
+                document.querySelector('.toggle-btn').textContent = 'English';
+            }
+        }
+    </script>
+</body>
+</html>
